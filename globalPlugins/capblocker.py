@@ -1,10 +1,12 @@
 import globalPluginHandler
 import keyboardHandler
 import winInputHook
+import winUser
 
 orig_internal_keyDownEvent = None
 def internal_keyDownEvent(vkCode,scanCode,extended,injected):
-	keyboardHandler.lastNVDAModifier = None
+	if vkCode == winUser.VK_CAPITAL:
+		keyboardHandler.lastNVDAModifier = None
 	return orig_internal_keyDownEvent(vkCode,scanCode,extended,injected)
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
